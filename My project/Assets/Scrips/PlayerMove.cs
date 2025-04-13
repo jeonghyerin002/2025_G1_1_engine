@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public Animator myAnimator;
-    public float speed = 3.5f;
-    // Start is called before the first frame update
+    public float speed = 3.5f; 
+
     private void Start()
     {
         myAnimator.SetBool("move", false);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         float direction = Input.GetAxis("Horizontal");
