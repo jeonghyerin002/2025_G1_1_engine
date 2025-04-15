@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
+  - Boundary
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -39,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 602115583
+    locked: 0
+  - name: Object
+    uniqueID: 2116387851
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
