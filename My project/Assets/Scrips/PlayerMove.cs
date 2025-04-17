@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     public float jumpForce = 4.25f;
     private Rigidbody2D rb;
     private bool isGrounded;
+    public bool isNeverDie;
 
     private void Awake()
     {
@@ -63,7 +64,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Respawn"))
+        if (collision.CompareTag("Respawn") && !isNeverDie)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
@@ -71,5 +72,18 @@ public class PlayerMove : MonoBehaviour
         {
             collision.GetComponent<LevelObject>().MoveToNextLevel();
         }
+
+        if (collision.CompareTag("NeverDie"))
+        {
+            Invoke("MustEat", 5.0f);
+            isNeverDie = true;
+            Destroy(collision.gameObject);
+        }
     }
+
+    void MustEat()
+    {
+        isNeverDie = false;
+    }
+
 }

@@ -9,6 +9,8 @@ public class LevelObject : MonoBehaviour
     public void MoveToNextLevel()
     {
         SceneManager.LoadScene(nextLevel);
+
+        Debug.Log("스테이지 이동");
     }
         // Start is called before the first frame update
         void Start()
