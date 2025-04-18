@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
         {
             isMovingRigjt = !isMovingRigjt;
 
-            Vector3 localscale = transform.localScale;
+            Vector3 localscale = transform.localScale;    //캐릭터를 x값으로 좌우반전 (1 * -1= -1 / -1 * -1= 1 반복)
             localscale.x *= -1;
             transform.localScale = localscale;
         }

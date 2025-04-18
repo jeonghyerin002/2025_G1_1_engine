@@ -2759,6 +2759,7 @@ MonoBehaviour:
   myAnimator: {fileID: 1723096083}
   speed: 4.5
   jumpForce: 4.25
+  isNeverDie: 0
 --- !u!61 &1723096088
 BoxCollider2D:
   m_ObjectHideFlags: 0

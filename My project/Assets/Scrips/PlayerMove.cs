@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     public bool isNeverDie;
+    public bool ispulsSpeed;
 
     private void Awake()
     {
@@ -40,13 +41,13 @@ public class PlayerMove : MonoBehaviour
             myAnimator.SetBool("move", false);
         }
 
-        
+
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        transform.Translate(Vector3.right * direction *speed * Time.deltaTime);
+        transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
             rb.AddForce(Vector2.up * 100);
@@ -64,26 +65,47 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Respawn") && !isNeverDie)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        if (collision.CompareTag("Finish"))
-        {
-            collision.GetComponent<LevelObject>().MoveToNextLevel();
+            if (collision.CompareTag("Respawn") && !isNeverDie && !ispulsSpeed)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            if (collision.CompareTag("Finish"))
+            {
+                collision.GetComponent<LevelObject>().MoveToNextLevel();
+            }
+
+            if (collision.CompareTag("NeverDie"))
+            {
+                Invoke("MustEat", 5.0f);
+                isNeverDie = true;
+                Destroy(collision.gameObject);
+
+            }
+            if (collision.CompareTag("pulsSpeed"))
+            {
+                Invoke("ShouldEat", 5.0f);
+                speed += 5;
+                Destroy(collision.gameObject);
+            }
+               
+
+
         }
 
-        if (collision.CompareTag("NeverDie"))
+
+
+        void MustEat()
         {
-            Invoke("MustEat", 5.0f);
-            isNeverDie = true;
-            Destroy(collision.gameObject);
+            isNeverDie = false;
         }
+
+        void ShouldEat()
+        {
+            speed -= 5;
+        }
+
     }
 
-    void MustEat()
-    {
-        isNeverDie = false;
-    }
-
+    
 }
