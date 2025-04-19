@@ -11,7 +11,8 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     public bool isNeverDie;
-    public bool ispulsSpeed;
+    public bool isplusSpeed;
+    public bool isplusJump;
 
     private void Awake()
     {
@@ -65,8 +66,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        {
-            if (collision.CompareTag("Respawn") && !isNeverDie && !ispulsSpeed)
+            if (collision.CompareTag("Respawn") && !isNeverDie && !isplusSpeed)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
@@ -82,30 +82,46 @@ public class PlayerMove : MonoBehaviour
                 Destroy(collision.gameObject);
 
             }
-            if (collision.CompareTag("pulsSpeed"))
+
+            if (collision.CompareTag("plusSpeed"))
             {
-                Invoke("ShouldEat", 5.0f);
+                Invoke("ShouldEat", 4.0f);
                 speed += 5;
                 Destroy(collision.gameObject);
+            }
+
+             if (collision.CompareTag("plusJump"))
+            {
+                Invoke("HaveToEat", 4.0f);
+                jumpForce += 5;
+                Destroy(collision.gameObject);
+
+            Debug.Log("啊涵款 个");
             }
                
 
 
-        }
-
-
-
-        void MustEat()
-        {
-            isNeverDie = false;
-        }
-
-        void ShouldEat()
-        {
-            speed -= 5;
-        }
+        
 
     }
+    void MustEat()
+    {
+        isNeverDie = false;
 
-    
+        Debug.Log("公利秒家");
+    }
+
+    void ShouldEat()
+    {
+        speed -= 4;
+        Debug.Log("捞加秒家");
+    }
+
+    void HaveToEat()
+    {
+        jumpForce -= 5;
+        Debug.Log("公芭款 个");
+    }
+
+
 }

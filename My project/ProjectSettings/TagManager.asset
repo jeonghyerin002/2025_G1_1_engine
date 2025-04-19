@@ -7,7 +7,8 @@ TagManager:
   - Boundary
   - Enemy
   - NeverDie
-  - pulseSpeed
+  - plusSpeed
+  - plusJump
   layers:
   - Default
   - TransparentFX

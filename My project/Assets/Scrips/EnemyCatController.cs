@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyCatController : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 3.0f;
     public float raycastDistance = 10.0f;
     public float traceDistance = 10.0f;
 
