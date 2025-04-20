@@ -7,21 +7,21 @@ public class BossCat : MonoBehaviour
     public int maxHealth = 100;       // 보스의 최대 체력
     private int CatHealth;        // 현재 체력
 
-    public float attackBanana = 3.5f; // 공격 간격
-    public GameObject throwBanana; // 발사체 프리팹
-    public Transform throwBananaPos;         // 발사 위치
+    public float attackBanana = 3.5f; 
+    public GameObject throwBanana; 
+    public Transform throwBananaPos;                      // 발사 위치
 
     private Animator animator;
     private void Start()
     {
-        CatHealth = maxHealth;     // 시작 시 체력 초기화
+        CatHealth = maxHealth;     
         animator = GetComponent<Animator>();
-        InvokeRepeating("Attack", 2f, attackBanana); // 주기적으로 공격
+        InvokeRepeating("Attack", 2f, attackBanana); 
     }
 
     public void TakeDamage(int amount)
     {
-        CatHealth -= amount;       // 체력 감소
+        CatHealth -= amount;     
         Debug.Log("보스 체력: " + CatHealth);
 
         if (CatHealth <= 0)
@@ -40,7 +40,7 @@ public class BossCat : MonoBehaviour
 
     void Die()
     {
-        CancelInvoke("Attack");  // 공격 멈추기
-        Destroy(gameObject); // 보스 제거
+        CancelInvoke("Attack");  
+        Destroy(gameObject); 
     }
 }
