@@ -8,17 +8,25 @@ public class PlayerMove : MonoBehaviour
     public Animator myAnimator;
     public float speed = 4.5f;
     public float jumpForce = 4.25f;
-    private Rigidbody2D rb;
-    private bool isGrounded;
+
+    public AudioClip jumpSound;
+
     public bool isNeverDie;
     public bool isplusSpeed;
     public bool isplusJump;
+
+    private Rigidbody2D rb;
+    private bool isGrounded;
+    private AudioSource audioSource;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
         myAnimator.SetBool("move", false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -46,6 +54,8 @@ public class PlayerMove : MonoBehaviour
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            audioSource.PlayOneShot(jumpSound);
         }
 
         transform.Translate(Vector3.right * direction * speed * Time.deltaTime);
