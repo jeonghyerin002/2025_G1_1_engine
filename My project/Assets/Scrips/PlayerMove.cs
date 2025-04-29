@@ -19,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     private bool isGrounded;
     private AudioSource audioSource;
 
+    float score;
+
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class PlayerMove : MonoBehaviour
         myAnimator.SetBool("move", false);
 
         audioSource = GetComponent<AudioSource>();
+
+        score = 1000f;
     }
 
 
@@ -62,6 +66,8 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
             rb.AddForce(Vector2.up * 100);
+
+        score -= Time.deltaTime;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -82,6 +88,7 @@ public class PlayerMove : MonoBehaviour
             }
             if (collision.CompareTag("Finish"))
             {
+            HighScore.TrySet(SceneManager.GetActiveScene().buildIndex, (int)score);
                 collision.GetComponent<LevelObject>().MoveToNextLevel();
             }
 
