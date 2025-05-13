@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
+
+public class GameManager : MonoBehaviour
+{
+    // Start is called before the first frame update
+
+    public TMP_InputField inputField;
+    public Button gameStartButton;
+
+    private void Start()
+    {
+        gameStartButton.onClick.AddListener(OnGameStartButtonClicked);
+        
+    }
+
+    private void OnGameStartButtonClicked()
+    {
+        string playerName = inputField.text;
+        if (string.IsNullOrEmpty(playerName) )
+        {
+            Debug.Log("플레이어 이름을 입력하세요.");
+            return;
+        }
+
+        PlayerPrefs.SetString("playerName" , playerName );
+        PlayerPrefs.Save();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
